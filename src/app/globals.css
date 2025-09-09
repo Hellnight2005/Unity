@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/* Unity Enterprises brand theme */
+:root {
+  /* Base (light) */
+  --ue-bg: #fefae0;
+  --ue-text: #000000;
+  --ue-primary: #dda15e;
+  --ue-accent-green: #283618;
+  --ue-accent-orange: #bc6c25;
+}
+
+@theme inline {
+  /* Map brand tokens to Tailwind v4 color vars */
+  --color-background: var(--ue-bg);
+  --color-foreground: var(--ue-text);
+  --color-primary: var(--ue-primary);
+  --color-accent-green: var(--ue-accent-green);
+  --color-accent-orange: var(--ue-accent-orange);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Optional dark theme placeholder (can be refined later) */
+.dark {
+  --ue-bg: var(--ue-accent-green);
+  --ue-text: #ffffff;
+}
+
+body {
+  background: var(--ue-bg);
+  color: var(--ue-text);
+}
+
+/* Hero orbit helpers */
+.orbit {
+  position: absolute;
+  animation: orbit 16s linear infinite;
+}
+.orbit-1 {
+  left: 10%;
+  top: 15%;
+}
+.orbit-2 {
+  right: 12%;
+  top: 25%;
+  animation-duration: 20s;
+}
+.orbit-3 {
+  left: 55%;
+  bottom: 12%;
+  animation-duration: 24s;
+}
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(24px) rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(24px) rotate(-180deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(24px) rotate(-360deg);
+  }
+}
+
+/* Feature tilt/glow */
+.tilt-card {
+  transition: transform 200ms, box-shadow 200ms, border-color 200ms;
+  will-change: transform;
+}
+.tilt-card:hover {
+  transform: translateY(-2px) rotate3d(1, 1, 0, 2deg);
+  box-shadow: 0 10px 24px rgba(188, 108, 37, 0.25);
+  border-color: var(--ue-accent-orange);
+}
+
+/* Infinite marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  display: inline-block;
+  min-width: 200%;
+  animation: marquee 22s linear infinite;
+}
+
+/* Footer icon spin */
+.spin-hover {
+  transition: transform 200ms;
+}
+.spin-hover:hover {
+  transform: rotate(8deg);
+}
