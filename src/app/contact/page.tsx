@@ -35,14 +35,14 @@ export default function ContactPage() {
             <p><strong className="text-[color:var(--ue-primary)]">Email:</strong> Unityenterprises36@gmail.com</p>
             <p><strong className="text-[color:var(--ue-primary)]">Offices:</strong> Mumbai MMR & MIDC Lote Parshuram (Ratnagiri)</p>
           </div>
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <iframe
               title="Mumbai office"
               src="https://www.google.com/maps?q=Mumbai&output=embed"
               className="w-full h-64 border"
               loading="lazy"
             />
-          </div>
+          </div> */}
         </div>
         <form action={async (fd) => submit(fd)} className="p-6 rounded-lg border border-black/10 space-y-4 bg-white">
           <input name="name" placeholder="Name" className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--ue-accent-orange)]" />

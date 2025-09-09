@@ -10,27 +10,35 @@ export const authOptions: NextAuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+            authorization: {
+                params: { prompt: "select_account" }, // always show account chooser
+            },
         }),
     ],
+    adapter: MongoDBAdapter(clientPromise as any),
+    session: { strategy: "jwt" },
     callbacks: {
-        async signIn({ user }: { user: { email?: string | null; name?: string | null; image?: string | null } }) {
+        async signIn({ user }) {
+            // Update custom fields like lastLoginAt
             await connectToDatabase();
             await User.updateOne(
                 { email: user.email },
-                {
-                    $setOnInsert: { name: user.name ?? undefined, image: user.image ?? undefined },
-                    $set: { lastLoginAt: new Date() },
-                },
-                { upsert: true }
+                { $set: { lastLoginAt: new Date() } },
+                { upsert: false } // don't duplicate users, adapter already inserts them
             );
             return true;
         },
         async session({ session }) {
+            if (!session.user?.email) return session;
+            await connectToDatabase();
+            const dbUser = await User.findOne({ email: session.user.email });
+
+            if (dbUser) {
+                session.user.id = dbUser._id.toString();
+                session.user.lastLoginAt = dbUser.lastLoginAt;
+            }
+
             return session;
         },
     },
-    session: { strategy: "jwt" },
-    adapter: MongoDBAdapter(clientPromise as any),
 };
-
-
