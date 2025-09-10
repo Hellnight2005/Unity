@@ -69,8 +69,8 @@ export default function Header() {
               key={item.href}
               href={item.href}
               className={`nav-item relative text-sm ${pathname === item.href
-                  ? "text-[color:var(--ue-primary)] font-semibold"
-                  : "text-black dark:text-white hover:opacity-80"
+                ? "text-[color:var(--ue-primary)] font-semibold"
+                : "text-black dark:text-white hover:opacity-80"
                 }`}
             >
               <span className="after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[color:var(--ue-primary)] hover:after:w-full after:transition-[width] after:duration-300">
