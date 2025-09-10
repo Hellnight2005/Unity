@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="py-10 text-center text-black/70">
+    <footer className="py-10 text-center text-foreground/70">
       <div className="space-x-4">
         <Link href="/" className="hover:underline">Home</Link>
         <Link href="/about" className="hover:underline">About</Link>

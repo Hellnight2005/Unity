@@ -46,7 +46,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 bg-background/80 backdrop-blur border-b border-black/5 dark:border-white/10"
+      className="sticky top-0 z-50 bg-[color:var(--ue-surface-0)]/80 backdrop-blur border-b border-black/5 dark:border-white/10"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         <Link
