@@ -7,6 +7,7 @@ import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -86,9 +87,11 @@ export default function Header() {
             {session ? (
               <div className="flex items-center gap-2">
                 {session.user?.image ? (
-                  <img
+                  <Image
                     src={session.user.image}
                     alt={session.user?.name ?? "User"}
+                    width={32}
+                    height={32}
                     className="h-8 w-8 rounded-full object-cover border border-black/10 dark:border-white/10"
                   />
                 ) : (
@@ -137,9 +140,11 @@ export default function Header() {
             {session ? (
               <div className="flex items-center gap-3 mt-1">
                 {session.user?.image ? (
-                  <img
+                  <Image
                     src={session.user.image}
                     alt={session.user?.name ?? "User"}
+                    width={32}
+                    height={32}
                     className="h-8 w-8 rounded-full object-cover border border-black/10 dark:border-white/10"
                   />
                 ) : (

@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
             },
         }),
     ],
-    adapter: MongoDBAdapter(clientPromise as any),
+    adapter: MongoDBAdapter(clientPromise),
     session: { strategy: "jwt" },
     callbacks: {
         async signIn({ user }) {
