@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -21,12 +21,15 @@ import {
   Settings,
   Database,
   Cloud,
+  Lock,
 } from "lucide-react";
-import { useState } from "react";
+import Link from "next/link";
+import { useTheme } from "next-themes"; // Import useTheme hook
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeClient() {
+  const { theme } = useTheme(); // Get the current theme
   const [submitting, setSubmitting] = useState(false);
   const [submitOk, setSubmitOk] = useState(false);
 
@@ -61,11 +64,28 @@ export default function HomeClient() {
     }
   }
 
+  // Dynamic button styles based on theme
+  const buttonPrimaryStyles = {
+    backgroundColor: theme === 'dark' ? 'var(--ue-primary)' : 'var(--ue-accent-green)',
+    color: 'white',
+  };
+
+  const buttonSecondaryStyles = {
+    backgroundColor: 'transparent',
+    borderColor: 'var(--ue-border)',
+    color: 'var(--ue-foreground)',
+  };
+
+  const formButtonStyles = {
+    backgroundColor: theme === 'dark' ? 'var(--ue-primary)' : 'var(--ue-accent-green)',
+    color: 'white',
+  };
+
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-background">
       {/* Hero */}
       <section id="home" className="relative overflow-hidden py-24 sm:py-32">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-6xl px-4 text-center">
           <h1 className="text-4xl sm:text-6xl font-extrabold text-foreground leading-tight" data-stagger>
             <span>A Better Tomorrow</span>
             <br />
@@ -73,78 +93,78 @@ export default function HomeClient() {
               Begins with Today’s <span className="text-[color:var(--ue-primary)]">Innovation</span>
             </span>
           </h1>
-          <p className="mt-5 text-foreground/70 text-lg">
+          <p className="mt-5 text-foreground/70 text-lg max-w-2xl mx-auto">
             Electrical Engineering & Advanced Digital Automation Solutions
           </p>
-          <div className="mt-8 flex gap-4" data-stagger>
-            <a href="/services" className="px-5 py-3 rounded-md bg-[color:var(--ue-primary)] text-white text-sm">
+          <div className="mt-8 flex justify-center gap-4" data-stagger>
+            <Link href="/services" className="px-5 py-3 rounded-md text-sm font-semibold transition-transform duration-200 hover:scale-105" style={buttonPrimaryStyles}>
               Explore Services
-            </a>
-            <a href="/contact" className="px-5 py-3 rounded-md border border-black/10 text-sm">
+            </Link>
+            <Link href="/contact" className="px-5 py-3 rounded-md text-sm font-semibold border transition-transform duration-200 hover:scale-105" style={buttonSecondaryStyles}>
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
-        {/* Floating icons (simple) */}
+        {/* Floating icons */}
         <div className="pointer-events-none absolute inset-0 -z-10 opacity-20">
-          <div className="absolute left-10 top-10 animate-pulse-slow text-[color:var(--ue-accent-green)]"><Zap /></div>
-          <div className="absolute right-16 top-20 animate-pulse-slow text-[color:var(--ue-accent-orange)]"><Cpu /></div>
-          <div className="absolute left-1/2 bottom-10 animate-pulse-slow text-[color:var(--ue-accent-green)]"><Camera /></div>
+          <div className="absolute left-10 top-10 animate-pulse-slow text-[color:var(--ue-accent-green)]"><Zap size={48} /></div>
+          <div className="absolute right-16 top-20 animate-pulse-slow text-[color:var(--ue-primary)]"><Cpu size={48} /></div>
+          <div className="absolute left-1/2 bottom-10 animate-pulse-slow text-[color:var(--ue-accent-green)]"><Camera size={48} /></div>
         </div>
       </section>
 
       {/* About */}
-      <section id="about" className="py-20 bg-[color:var(--ue-surface-1)]">
+      <section id="about" className="py-20 bg-muted">
         <div className="mx-auto max-w-6xl px-4 grid md:grid-cols-2 gap-10 items-center">
-          <div className="h-64 bg-[color:var(--ue-accent-green)]/10 rounded-lg flex items-center justify-center">
-            <Building className="text-[color:var(--ue-accent-green)]" size={64} />
+          <div className="h-64 bg-card rounded-xl flex items-center justify-center border border-border">
+            <Building className="text-[color:var(--ue-primary)]" size={64} />
           </div>
           <div>
             <h2 className="text-3xl font-bold text-foreground">About Us</h2>
-            <p className="mt-4 text-foreground/70">
-              With a footprint in Mumbai and Ratnagiri, we deliver <span className="text-[color:var(--ue-primary)]">innovation</span>,
-              <span className="text-[color:var(--ue-primary)]"> automation</span>, and
-              <span className="text-[color:var(--ue-primary)]"> digitalization</span> across industries.
+            <p className="mt-4 text-foreground/70 leading-relaxed">
+              With a footprint in Mumbai and Ratnagiri, we deliver <span className="text-[color:var(--ue-primary)] font-semibold">innovation</span>,
+              <span className="text-[color:var(--ue-primary)] font-semibold"> automation</span>, and
+              <span className="text-[color:var(--ue-primary)] font-semibold"> digitalization</span> across industries.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Services - simplified horizontal panels */}
+      {/* Services */}
       <section id="services" className="py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl font-bold text-foreground mb-8">Services</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" data-stagger>
-            <div className="p-6 rounded-lg bg-[color:var(--ue-accent-orange)]/10">
-              <h3 className="font-semibold text-foreground flex items-center gap-2"><Cpu size={18}/> AI & Digital</h3>
+            <div className="p-6 rounded-xl border border-border bg-card">
+              <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Cpu size={20} className="text-[color:var(--ue-primary)]" /> AI & Digital</h3>
               <ul className="mt-3 text-sm text-foreground/70 space-y-1">
-                <li className="flex items-center gap-2"><Database size={16}/> Data logging</li>
-                <li className="flex items-center gap-2"><Cloud size={16}/> Energy monitoring</li>
-                <li className="flex items-center gap-2"><Cpu size={16}/> IoT dashboards</li>
+                <li className="flex items-center gap-2"><Database size={16} /> Data logging</li>
+                <li className="flex items-center gap-2"><Cloud size={16} /> Energy monitoring</li>
+                <li className="flex items-center gap-2"><Cpu size={16} /> IoT dashboards</li>
               </ul>
             </div>
-            <div className="p-6 rounded-lg bg-[color:var(--ue-accent-orange)]/10">
-              <h3 className="font-semibold text-foreground flex items-center gap-2"><Zap size={18}/> Electrical</h3>
+            <div className="p-6 rounded-xl border border-border bg-card">
+              <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Zap size={20} className="text-[color:var(--ue-primary)]" /> Electrical</h3>
               <ul className="mt-3 text-sm text-foreground/70 space-y-1">
-                <li className="flex items-center gap-2"><Settings size={16}/> Panel manufacturing</li>
-                <li className="flex items-center gap-2"><Plug size={16}/> Motor starters</li>
-                <li className="flex items-center gap-2"><Wrench size={16}/> Wiring</li>
+                <li className="flex items-center gap-2"><Settings size={16} /> Panel manufacturing</li>
+                <li className="flex items-center gap-2"><Plug size={16} /> Motor starters</li>
+                <li className="flex items-center gap-2"><Wrench size={16} /> Wiring</li>
               </ul>
             </div>
-            <div className="p-6 rounded-lg bg-[color:var(--ue-accent-orange)]/10">
-              <h3 className="font-semibold text-foreground flex items-center gap-2"><Camera size={18}/> Surveillance & EPABX</h3>
+            <div className="p-6 rounded-xl border border-border bg-card">
+              <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Camera size={20} className="text-[color:var(--ue-primary)]" /> Surveillance & EPABX</h3>
               <ul className="mt-3 text-sm text-foreground/70 space-y-1">
-                <li className="flex items-center gap-2"><Camera size={16}/> CCTV</li>
-                <li className="flex items-center gap-2"><LockIcon/> Biometrics</li>
-                <li className="flex items-center gap-2"><Camera size={16}/> Video door phones</li>
+                <li className="flex items-center gap-2"><Camera size={16} /> CCTV</li>
+                <li className="flex items-center gap-2"><Lock size={16} /> Biometrics</li>
+                <li className="flex items-center gap-2"><Camera size={16} /> Video door phones</li>
               </ul>
             </div>
-            <div className="p-6 rounded-lg bg-[color:var(--ue-accent-orange)]/10">
-              <h3 className="font-semibold text-foreground flex items-center gap-2"><Wrench size={18}/> Maintenance</h3>
+            <div className="p-6 rounded-xl border border-border bg-card">
+              <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Wrench size={20} className="text-[color:var(--ue-primary)]" /> Maintenance</h3>
               <ul className="mt-3 text-sm text-foreground/70 space-y-1">
-                <li className="flex items-center gap-2"><Wrench size={16}/> Installation</li>
-                <li className="flex items-center gap-2"><Cog size={16}/> Preventive maintenance</li>
-                <li className="flex items-center gap-2"><Wrench size={16}/> Spare parts</li>
+                <li className="flex items-center gap-2"><Wrench size={16} /> Installation</li>
+                <li className="flex items-center gap-2"><Cog size={16} /> Preventive maintenance</li>
+                <li className="flex items-center gap-2"><Wrench size={16} /> Spare parts</li>
               </ul>
             </div>
           </div>
@@ -152,21 +172,21 @@ export default function HomeClient() {
       </section>
 
       {/* Vision & Aim */}
-      <section id="vision" className="py-20">
-        <div className="mx-auto max-w-4xl px-4 text-center">
+      <section id="vision" className="py-20 bg-muted">
+        <div className="mx-auto max-w-4xl px-4 text-center" data-stagger>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
             Empowering industries through <span className="text-[color:var(--ue-primary)]">innovation</span> and reliability
           </h2>
           <p className="mt-4 text-foreground/70">Fulfill client needs by delivering outstanding & reliable service.</p>
           <div className="mt-8 flex justify-center gap-6 opacity-60">
-            <Target />
-            <Lightbulb />
+            <Target size={48} className="text-[color:var(--ue-primary)]" />
+            <Lightbulb size={48} className="text-[color:var(--ue-primary)]" />
           </div>
         </div>
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-[color:var(--ue-surface-1)]">
+      <section className="py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl font-bold text-foreground mb-8">Why Choose Us</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" data-stagger>
@@ -195,7 +215,7 @@ export default function HomeClient() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 bg-[color:var(--ue-surface-1)]">
+      <section id="contact" className="py-20 bg-muted">
         <div className="mx-auto max-w-6xl px-4 grid md:grid-cols-2 gap-10">
           <div>
             <h2 className="text-3xl font-bold text-foreground mb-4">Contact</h2>
@@ -207,12 +227,12 @@ export default function HomeClient() {
           </div>
           <form
             action={async (formData) => handleSubmit(formData)}
-            className="p-6 rounded-lg border border-black/10 space-y-4"
+            className="p-6 rounded-xl border border-border bg-card space-y-4"
           >
-            <input name="name" placeholder="Name" className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--ue-accent-orange)]" />
-            <input name="email" placeholder="Email" className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--ue-accent-orange)]" />
-            <textarea name="message" placeholder="Message" rows={4} className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--ue-accent-orange)]" />
-            <button type="submit" disabled={submitting} className="px-5 py-3 rounded-md bg-[color:var(--ue-primary)] text-white">
+            <input name="name" placeholder="Name" className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--ue-primary)] bg-background text-foreground" />
+            <input name="email" placeholder="Email" className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--ue-primary)] bg-background text-foreground" />
+            <textarea name="message" placeholder="Message" rows={4} className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--ue-primary)] bg-background text-foreground" />
+            <button type="submit" disabled={submitting} className="px-5 py-3 rounded-md text-white font-semibold" style={formButtonStyles}>
               {submitting ? "Sending..." : submitOk ? "Sent ✓" : "Submit"}
             </button>
           </form>
@@ -226,19 +246,11 @@ export default function HomeClient() {
 
 function Feature({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
-    <div className="p-6 rounded-lg border border-black/10 bg-white hover:shadow-md transition-transform will-change-transform tilt-card">
-      <div className="h-8 w-8 text-[color:var(--ue-accent-green)]">{icon}</div>
-      <div className="mt-2 font-semibold text-black">{title}</div>
+    <div className="p-6 rounded-xl border border-border bg-card hover:shadow-md transition-transform will-change-transform transform hover:scale-105">
+      <div className="h-10 w-10 p-2 rounded-full flex items-center justify-center bg-accent text-[color:var(--ue-primary)]">
+        {icon}
+      </div>
+      <div className="mt-4 font-semibold text-foreground">{title}</div>
     </div>
   );
 }
-
-function LockIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M17 8V7a5 5 0 10-10 0v1H5v14h14V8h-2zm-8-1a3 3 0 116 0v1H9V7z" />
-    </svg>
-  );
-}
-
-

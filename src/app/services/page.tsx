@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import gsap from "gsap";
-import { Cpu, Database, Cloud, Zap, Settings, Plug, Camera, Wrench, Cog } from "lucide-react";
+import { Cpu, Database, Cloud, Zap, Settings, Plug, Camera, Wrench, Cog, Lightbulb, Target } from "lucide-react";
 
 export default function ServicesPage() {
   useEffect(() => {
@@ -10,31 +10,39 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <main className="min-h-screen py-16">
-      <div className="mx-auto max-w-6xl px-4 space-y-10">
-        <h1 className="text-4xl font-bold text-black">Services</h1>
+    <main className="min-h-screen py-24 bg-background">
+      <div className="mx-auto max-w-7xl px-4 space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-foreground" data-card>
+            Our Solutions for a Digital Future
+          </h1>
+          <p className="text-lg text-foreground/80 leading-relaxed" data-card>
+            We offer a full spectrum of engineering and automation services tailored to
+            help your business thrive in the modern industrial landscape.
+          </p>
+        </div>
 
-        <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card title="AI & Digital" icon={<Cpu />}> 
-            <li className="flex items-center gap-2"><Database size={16}/> Data logging</li>
-            <li className="flex items-center gap-2"><Cloud size={16}/> Energy monitoring</li>
-            <li className="flex items-center gap-2"><Cpu size={16}/> IoT dashboards</li>
+        <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <Card title="AI & Digital" icon={<Cpu />}>
+            <li className="flex items-center gap-2"><Database size={16} /> Data Logging</li>
+            <li className="flex items-center gap-2"><Cloud size={16} /> Energy Monitoring</li>
+            <li className="flex items-center gap-2"><Lightbulb size={16} /> IoT Dashboards</li>
           </Card>
-          <Card title="Electrical" icon={<Zap />}>
-            <li className="flex items-center gap-2"><Settings size={16}/> Panel manufacturing</li>
-            <li className="flex items-center gap-2"><Plug size={16}/> Power factor control</li>
-            <li className="flex items-center gap-2"><Plug size={16}/> Motor starters</li>
-            <li className="flex items-center gap-2"><Wrench size={16}/> Industrial wiring</li>
+          <Card title="Electrical Engineering" icon={<Zap />}>
+            <li className="flex items-center gap-2"><Settings size={16} /> Panel Manufacturing</li>
+            <li className="flex items-center gap-2"><Plug size={16} /> Power Factor Control</li>
+            <li className="flex items-center gap-2"><Target size={16} /> Motor Starters</li>
+            <li className="flex items-center gap-2"><Wrench size={16} /> Industrial Wiring</li>
           </Card>
           <Card title="Surveillance & EPABX" icon={<Camera />}>
-            <li className="flex items-center gap-2"><Camera size={16}/> CCTV & DVR/NVR</li>
-            <li className="flex items-center gap-2"><Camera size={16}/> Biometric attendance</li>
-            <li className="flex items-center gap-2"><Camera size={16}/> Video door phone</li>
+            <li className="flex items-center gap-2"><Camera size={16} /> CCTV & DVR/NVR Systems</li>
+            <li className="flex items-center gap-2"><Camera size={16} /> Biometric Attendance</li>
+            <li className="flex items-center gap-2"><Camera size={16} /> Video Door Phones</li>
           </Card>
-          <Card title="Maintenance / AC / Washing Machine" icon={<Wrench />}>
-            <li className="flex items-center gap-2"><Wrench size={16}/> Installation</li>
-            <li className="flex items-center gap-2"><Cog size={16}/> Preventive maintenance</li>
-            <li className="flex items-center gap-2"><Wrench size={16}/> Spare parts</li>
+          <Card title="Maintenance & Repair" icon={<Wrench />}>
+            <li className="flex items-center gap-2"><Wrench size={16} /> Installation & Servicing</li>
+            <li className="flex items-center gap-2"><Cog size={16} /> Preventive Maintenance</li>
+            <li className="flex items-center gap-2"><Wrench size={16} /> Spare Parts Sourcing</li>
           </Card>
         </section>
       </div>
@@ -44,16 +52,19 @@ export default function ServicesPage() {
 
 function Card({ title, icon, children }: { title: string; icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div data-card className="p-6 rounded-lg border border-black/10 bg-white">
-      <div className="flex items-center gap-2 text-black">
-        <div className="text-[color:var(--ue-accent-green)]">{icon}</div>
-        <h3 className="font-semibold">{title}</h3>
+    <div
+      data-card
+      className="p-6 rounded-xl border border-border bg-card dark:hover:border-[color:var(--ue-primary)] transition-colors duration-300"
+    >
+      <div className="flex items-center gap-4 text-foreground mb-4">
+        <div className="p-3 rounded-full bg-accent text-[color:var(--ue-primary)] dark:bg-white/10 dark:text-[color:var(--ue-primary)]">
+          {icon}
+        </div>
+        <h3 className="font-semibold text-lg">{title}</h3>
       </div>
-      <ul className="mt-3 text-sm text-black/70 space-y-1">
+      <ul className="text-sm text-foreground/80 space-y-2">
         {children}
       </ul>
     </div>
   );
 }
-
-

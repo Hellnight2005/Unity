@@ -22,6 +22,11 @@ export default function Header() {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!headerRef.current) return;
@@ -46,12 +51,14 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 bg-[color:var(--ue-surface-0)]/80 backdrop-blur border-b border-black/5 dark:border-white/10"
+      // Using Tailwind classes for dynamic backgrounds
+      className="sticky top-0 z-50 backdrop-blur border-b border-black/5 dark:border-white/10 bg-[var(--ue-bg)] dark:bg-[var(--ue-accent-green)]"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         <Link
           href="/"
-          className="font-bold text-lg tracking-wide text-[color:var(--ue-accent-green)]"
+          // Using dark: for conditional text color
+          className="font-bold text-lg tracking-wide text-[color:var(--ue-accent-green)] dark:text-[color:var(--ue-primary)]"
         >
           UE ⚡
         </Link>
@@ -61,11 +68,10 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className={`nav-item relative text-sm ${
-                pathname === item.href
+              className={`nav-item relative text-sm ${pathname === item.href
                   ? "text-[color:var(--ue-primary)] font-semibold"
                   : "text-black dark:text-white hover:opacity-80"
-              }`}
+                }`}
             >
               <span className="after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[color:var(--ue-primary)] hover:after:w-full after:transition-[width] after:duration-300">
                 {item.label}
@@ -75,13 +81,15 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <button
-            aria-label="Toggle theme"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
-          >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+          {mounted && (
+            <button
+              aria-label="Toggle theme"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+            >
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+          )}
 
           <div className="hidden md:block">
             {session ? (
@@ -125,7 +133,9 @@ export default function Header() {
         </div>
       </div>
       {mobileOpen && (
-        <div className="md:hidden border-t border-black/5 dark:border-white/10 bg-background">
+        <div
+          className="md:hidden border-t border-black/5 dark:border-white/10 bg-[var(--ue-bg)] dark:bg-[var(--ue-accent-green)]"
+        >
           <nav className="px-4 py-3 flex flex-col gap-3">
             {navItems.map((item) => (
               <Link
@@ -151,7 +161,10 @@ export default function Header() {
                   <div className="h-8 w-8 rounded-full bg-black/10 dark:bg-white/20" />
                 )}
                 <button
-                  onClick={() => { setMobileOpen(false); signOut(); }}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    signOut();
+                  }}
                   className="px-3 py-2 rounded-md bg-[color:var(--ue-primary)] text-white text-sm"
                 >
                   Logout
@@ -159,7 +172,10 @@ export default function Header() {
               </div>
             ) : (
               <button
-                onClick={() => { setMobileOpen(false); signIn("google", { prompt: "select_account" }); }}
+                onClick={() => {
+                  setMobileOpen(false);
+                  signIn("google", { prompt: "select_account" });
+                }}
                 className="mt-1 px-3 py-2 rounded-md bg-[color:var(--ue-primary)] text-white text-sm"
               >
                 Login
