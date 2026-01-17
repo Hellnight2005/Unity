@@ -13,7 +13,7 @@ export default function WhyChooseUs() {
     ];
 
     return (
-        <section className="py-20 bg-white dark:bg-[#0B1128] transition-colors duration-300">
+        <section id="why-choose-us" className="py-20 bg-white dark:bg-[#0B1128] transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-16 animate-fade-in-up">
                     <h2 className="text-3xl md:text-4xl font-heading font-extrabold mb-4 text-slate-900 dark:text-white">

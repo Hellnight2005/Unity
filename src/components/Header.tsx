@@ -42,6 +42,7 @@ export default function Header() {
     { name: "About Us", href: "/about" },
     { name: "Electrical Solutions", href: "/electrical" },
     { name: "Digital & AI", href: "/digital" },
+    { name: "Why Choose Us", href: "/#why-choose-us" },
     { name: "Clients", href: "/#clients" },
     { name: "Contact Us", href: "/contact" },
   ];
