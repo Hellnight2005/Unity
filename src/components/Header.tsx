@@ -41,7 +41,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-10 h-10 bg-white shadow-sm rounded-lg overflow-hidden flex items-center justify-center border border-gray-100 group-hover:border-[var(--ue-primary)] transition-colors">
             <Image
-              src="/Unity logo.jpeg"
+              src="/unity-logo.jpeg"
               alt="Unity Logo"
               width={40}
               height={40}
