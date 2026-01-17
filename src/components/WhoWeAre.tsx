@@ -3,8 +3,8 @@ import { Target, Lightbulb } from "lucide-react";
 
 export default function WhoWeAre() {
     return (
-        <section className="relative py-24 pt-44 bg-[#0B1128] overflow-hidden transition-colors duration-300">
-            <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <section className="relative py-12 pt-24 md:py-24 md:pt-44 bg-[#0B1128] overflow-hidden transition-colors duration-300">
+            <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
                 <div className="order-2 lg:order-1 animate-fade-in-up">
                     <div className="inline-block px-4 py-1.5 border border-blue-900/30 rounded-full bg-blue-900/10 mb-6">
                         <span className="text-blue-400 font-bold text-xs uppercase tracking-widest">
@@ -12,24 +12,24 @@ export default function WhoWeAre() {
                         </span>
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl font-heading font-light text-white mb-8 leading-tight">
+                    <h2 className="text-3xl md:text-5xl font-heading font-light text-white mb-6 md:mb-8 leading-tight">
                         Engineering Excellence <br />
                         <span className="font-bold">Since 2021</span>
                     </h2>
 
-                    <p className="text-gray-300 leading-relaxed text-lg mb-8 font-light">
+                    <p className="text-gray-300 leading-relaxed text-base md:text-lg mb-6 md:mb-8 font-light">
                         Founded in 2021 under the leadership of <strong className="text-white">Siddhesh Maruti Salunke</strong>,
                         the company has evolved into <strong className="text-blue-400">Unity Enterprises</strong>.
                         We are a distinguished entity specializing in electrical engineering and advanced digital automation solutions.
                     </p>
 
-                    <p className="text-gray-300 leading-relaxed text-lg mb-12 font-light">
+                    <p className="text-gray-300 leading-relaxed text-base md:text-lg mb-8 md:mb-12 font-light">
                         With an operational footprint across <span className="font-medium text-white">Mumbai Suburban MMR</span> and <span className="font-medium text-white">MIDC Lote Parshuram</span>, we deliver world-class solutions that drive industrial growth.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         {/* Vision Card */}
-                        <div className="p-8 bg-[#151e32] rounded-2xl border border-blue-900/20 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                        <div className="p-6 md:p-8 bg-[#151e32] rounded-2xl border border-blue-900/20 shadow-sm hover:shadow-xl transition-all duration-300 group">
                             <div className="w-12 h-12 bg-blue-900/30 text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <Target size={24} />
                             </div>
@@ -40,7 +40,7 @@ export default function WhoWeAre() {
                         </div>
 
                         {/* Aim Card */}
-                        <div className="p-8 bg-[#151e32] rounded-2xl border border-blue-900/20 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                        <div className="p-6 md:p-8 bg-[#151e32] rounded-2xl border border-blue-900/20 shadow-sm hover:shadow-xl transition-all duration-300 group">
                             <div className="w-12 h-12 bg-indigo-900/30 text-blue-200 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <Lightbulb size={24} />
                             </div>
@@ -52,7 +52,7 @@ export default function WhoWeAre() {
                     </div>
                 </div>
 
-                <div className="relative order-1 lg:order-2 h-full min-h-[500px]">
+                <div className="relative order-1 lg:order-2 h-full min-h-[300px] md:min-h-[500px]">
                     <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl h-full border border-gray-800">
                         <Image
                             src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070"

@@ -75,8 +75,8 @@ export default function HeroSection() {
 
     return (
         <section className="relative w-full bg-[var(--ue-secondary)]">
-            {/* Slider Container with Overflow Hidden */}
-            <div className="relative w-full h-[600px] md:h-[700px] overflow-hidden">
+            {/* Slider Container - Responsive Height */}
+            <div className="relative w-full min-h-[650px] md:h-[700px] overflow-hidden flex flex-col">
                 {/* Slides */}
                 {slides.map((slide, index) => (
                     <div
@@ -89,18 +89,38 @@ export default function HeroSection() {
                             className="absolute inset-0 bg-cover bg-center"
                             style={{ backgroundImage: `url(${slide.image})` }}
                         >
-                            {/* Overlay Gradient: Stronger right fade for text readability */}
-                            <div className="absolute inset-0 bg-gradient-to-l from-[#0f172a]/95 via-[#0f172a]/70 to-transparent"></div>
+                            {/* Overlay: Darker on mobile for text readability */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/95 md:bg-gradient-to-l md:from-[#0f172a]/95 md:via-[#0f172a]/70 md:to-transparent"></div>
                         </div>
 
-                        {/* Content Overlay - Right Side - Minimalist (Points + CTA Only) */}
-                        <div className="absolute inset-0 flex items-center justify-end z-20 pointer-events-none">
-                            <div className="container mx-auto px-6 md:px-12 flex justify-end h-full py-20 pb-40">
-                                <div className="max-w-2xl text-white space-y-10 animate-fadeInRight pointer-events-auto flex flex-col justify-center items-start text-left ml-auto">
+                        {/* Content Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center md:justify-end z-20 pointer-events-none">
+                            <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-center md:justify-end h-full pt-32 pb-20 md:py-20"> {/* Added top padding for mobile */}
 
-                                    {/* Dynamic Points List - Timeline Style (Left Branch) */}
-                                    <div className="relative pl-6">
-                                        {/* Vertical linking line - Centered on dots */}
+                                {/* Mobile Layout: Centered, Simplified */}
+                                <div className="w-full md:hidden flex flex-col items-center justify-center text-center space-y-6 pointer-events-auto">
+                                    <h2 className="text-4xl font-heading font-bold uppercase tracking-wider text-[var(--ue-primary)] leading-tight drop-shadow-md">
+                                        {slide.title}
+                                    </h2>
+                                    <p className="text-gray-100 text-lg font-light leading-relaxed max-w-md drop-shadow-sm">
+                                        {slide.subtitle}
+                                    </p>
+                                    <p className="text-gray-300 text-sm leading-relaxed max-w-sm mx-auto hidden sm:block">
+                                        {slide.description}
+                                    </p>
+
+                                    <a href={slide.ctaLink} className="mt-4 px-8 py-3 bg-[var(--ue-primary)] text-white font-bold rounded-full shadow-lg hover:bg-blue-600 transition-all uppercase tracking-wide text-sm flex items-center gap-2">
+                                        {slide.ctaText} <ArrowRight size={18} />
+                                    </a>
+                                </div>
+
+
+                                {/* Desktop Layout: Right aligned, Detailed List */}
+                                <div className="hidden md:flex w-full md:max-w-2xl text-white space-y-10 animate-fadeInRight pointer-events-auto flex-col justify-center items-start text-left ml-auto">
+
+                                    {/* Dynamic Points List - Hidden on Mobile */}
+                                    <div className="relative pl-6 w-full">
+                                        {/* Vertical linking line */}
                                         <div className="absolute left-0 top-5 bottom-5 w-[2px] bg-sky-500/30 rounded-full"></div>
 
                                         <ul className="space-y-8 relative">
@@ -115,7 +135,7 @@ export default function HeroSection() {
                                                             <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm"></div>
                                                         </div>
                                                     </div>
-                                                    <span className="text-xl md:text-2xl font-bold text-white tracking-wide shadow-black drop-shadow-md opacity-90 group-hover:opacity-100 transition-opacity">
+                                                    <span className="text-2xl font-bold text-white tracking-wide shadow-black drop-shadow-md opacity-90 group-hover:opacity-100 transition-opacity">
                                                         {point}
                                                     </span>
                                                 </li>
@@ -123,15 +143,28 @@ export default function HeroSection() {
                                         </ul>
                                     </div>
 
-                                    {/* CTA Removed as per user request */}
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))}
 
-                {/* Navigation Arrows */}
+                {/* Navigation Arrows - Adjusted for Mobile */}
+                <div className="absolute bottom-32 right-6 flex gap-4 z-30 md:hidden">
+                    <button
+                        onClick={prevSlide}
+                        className="p-3 rounded-full bg-white/10 text-white backdrop-blur-md border border-white/10"
+                    >
+                        <ChevronLeft size={24} />
+                    </button>
+                    <button
+                        onClick={nextSlide}
+                        className="p-3 rounded-full bg-white/10 text-white backdrop-blur-md border border-white/10"
+                    >
+                        <ChevronRight size={24} />
+                    </button>
+                </div>
+
                 <button
                     onClick={prevSlide}
                     className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-[var(--ue-primary)] text-white backdrop-blur-md transition-all border border-white/10 hover:scale-110 hidden md:flex"
@@ -154,9 +187,9 @@ export default function HeroSection() {
                         <div
                             key={slide.id}
                             onClick={() => setCurrentSlide(index)}
-                            className={`cursor-pointer p-8 rounded-2xl transition-all duration-300 relative overflow-hidden group border-2 flex flex-col
+                            className={`cursor-pointer p-6 md:p-8 rounded-2xl transition-all duration-300 relative overflow-hidden group border-2 flex flex-col
                             ${currentSlide === index
-                                    ? "bg-[#1e293b] border-[var(--ue-primary)] shadow-[0_0_30px_rgba(56,189,248,0.2)] -translate-y-4"
+                                    ? "bg-[#1e293b] border-[var(--ue-primary)] shadow-[0_0_30px_rgba(56,189,248,0.2)] -translate-y-0 md:-translate-y-4"
                                     : "bg-[#151e32] border-slate-700 hover:border-slate-500 hover:-translate-y-2 opacity-90"
                                 }`}
                         >

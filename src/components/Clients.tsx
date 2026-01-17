@@ -19,8 +19,8 @@ const tickerClients = [...clients, ...clients];
 
 export default function ClientsSection() {
     return (
-        <section id="clients" className="py-24 bg-[var(--ue-bg)] overflow-hidden">
-            <div className="max-w-[1400px] mx-auto px-6 mb-16 text-center">
+        <section id="clients" className="py-12 md:py-24 bg-[var(--ue-bg)] overflow-hidden">
+            <div className="max-w-[1400px] mx-auto px-6 mb-10 md:mb-16 text-center">
                 <h4 className="text-[var(--ue-primary)] font-bold uppercase tracking-widest text-sm mb-4">Our Trusted Partners</h4>
                 <h2 className="text-3xl md:text-5xl font-heading font-light text-[#0B1128] dark:text-gray-100">
                     Industry Leaders Trust Unity
