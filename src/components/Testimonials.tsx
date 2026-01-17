@@ -44,7 +44,7 @@ export default function Testimonials() {
                                     <Star key={i} size={20} fill="currentColor" className="opacity-80" />
                                 ))}
                             </div>
-                            <p className="text-gray-300 text-lg leading-relaxed mb-8 font-light">"{t.content}"</p>
+                            <p className="text-gray-300 text-lg leading-relaxed mb-8 font-light">&quot;{t.content}&quot;</p>
                             <div>
                                 <h4 className="text-white font-bold text-lg group-hover:text-blue-400 transition-colors">{t.name}</h4>
                                 <p className="text-sm text-gray-500 font-medium uppercase tracking-wide">{t.role}</p>
