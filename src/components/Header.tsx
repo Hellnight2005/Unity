@@ -22,6 +22,18 @@ export default function Header() {
     return () => ctx.revert();
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileOpen]);
+
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
@@ -91,7 +103,7 @@ export default function Header() {
 
       {/* Mobile Menu Overlay - Animated Slide-In */}
       <div
-        className={`lg:hidden fixed inset-0 z-[9999] bg-[#0B1128] transition-transform duration-500 ease-in-out w-screen h-screen overflow-hidden ${mobileOpen ? "translate-x-0" : "translate-x-full"
+        className={`lg:hidden fixed inset-0 z-[9999] bg-[#0B1128] transition-transform duration-500 ease-in-out w-screen h-[100dvh] overflow-hidden ${mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
       >
         <div className="flex flex-col h-full bg-[#0B1128]">
