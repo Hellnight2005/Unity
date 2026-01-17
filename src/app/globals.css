@@ -51,6 +51,13 @@
   /* Keep Blue accent */
 }
 
+html,
+body {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
 body {
   background: var(--ue-bg);
   color: var(--ue-text);
