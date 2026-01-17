@@ -1,189 +1,119 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { Moon, Sun, Menu, X } from "lucide-react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
-];
+import { Menu, X, ArrowRight } from "lucide-react";
+import gsap from "gsap";
+
 
 export default function Header() {
-  const { data: session } = useSession();
-  const { theme, setTheme } = useTheme();
-  const pathname = usePathname();
-  const headerRef = useRef<HTMLElement | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!headerRef.current) return;
     const ctx = gsap.context(() => {
-      gsap.from(headerRef.current, {
-        y: -40,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power2",
-      });
-      gsap.from(".nav-item", {
-        opacity: 0,
-        y: -12,
-        duration: 0.4,
-        stagger: 0.06,
-        delay: 0.2,
-      });
-    }, headerRef);
+      gsap.fromTo(navRef.current,
+        { y: -100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+      );
+    }, navRef);
     return () => ctx.revert();
   }, []);
 
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about" },
+    { name: "Electrical Solutions", href: "/electrical" },
+    { name: "Digital & AI", href: "/digital" },
+    { name: "Clients", href: "/#clients" },
+    { name: "Contact Us", href: "/contact" },
+  ];
+
   return (
     <header
-      ref={headerRef}
-      // Using Tailwind classes for dynamic backgrounds
-      className="sticky top-0 z-50 backdrop-blur border-b border-black/5 dark:border-white/10 bg-[var(--ue-bg)] dark:bg-[var(--ue-accent-green)]"
+      ref={navRef}
+      className="sticky top-0 z-50 bg-[var(--ue-nav-bg)] border-b border-gray-100 shadow-sm"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-        <Link
-          href="/"
-          // Using dark: for conditional text color
-          className="font-bold text-lg tracking-wide text-[color:var(--ue-accent-green)] dark:text-[color:var(--ue-primary)]"
-        >
-          UE ⚡
+      <div className="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto">
+        {/* Logo Section */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-10 h-10 bg-white shadow-sm rounded-lg overflow-hidden flex items-center justify-center border border-gray-100 group-hover:border-[var(--ue-primary)] transition-colors">
+            <Image
+              src="/Unity logo.jpeg"
+              alt="Unity Logo"
+              width={40}
+              height={40}
+              className="object-contain p-0.5"
+            />
+          </div>
+          <span className="font-heading font-medium text-2xl tracking-tight text-[var(--ue-secondary)]">
+            UNITY<span className="text-[var(--ue-primary)]">.</span>
+          </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
-          {navItems.map((item) => (
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-10">
+          {navLinks.map((link) => (
             <Link
-              key={item.href}
-              href={item.href}
-              className={`nav-item relative text-sm ${pathname === item.href
-                ? "text-[color:var(--ue-primary)] font-semibold"
-                : "text-black dark:text-white hover:opacity-80"
-                }`}
+              key={link.name}
+              href={link.href}
+              className="text-[15px] font-normal text-[var(--ue-secondary)] hover:text-[var(--ue-primary)] transition-colors relative group py-2"
             >
-              <span className="after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[color:var(--ue-primary)] hover:after:w-full after:transition-[width] after:duration-300">
-                {item.label}
-              </span>
+              {link.name}
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--ue-primary)] transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          {mounted && (
-            <button
-              aria-label="Toggle theme"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
-            >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-          )}
+        {/* Right Actions */}
+        <div className="flex items-center gap-5">
 
-          <div className="hidden md:block">
-            {session ? (
-              <div className="flex items-center gap-2">
-                {session.user?.image ? (
-                  <Image
-                    src={session.user.image}
-                    alt={session.user?.name ?? "User"}
-                    width={32}
-                    height={32}
-                    className="h-8 w-8 rounded-full object-cover border border-black/10 dark:border-white/10"
-                  />
-                ) : (
-                  <div className="h-8 w-8 rounded-full bg-black/10 dark:bg-white/20" />
-                )}
-                <button
-                  aria-label="Logout"
-                  onClick={() => signOut()}
-                  className="px-3 py-1.5 rounded-md bg-[color:var(--ue-primary)] text-white text-sm hover:opacity-90"
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <button
-                aria-label="Login with Google"
-                onClick={() => signIn("google", { prompt: "select_account" })}
-                className="px-3 py-1.5 rounded-md bg-[color:var(--ue-primary)] text-white text-sm hover:opacity-90"
-              >
-                Login
-              </button>
-            )}
-          </div>
-          <button
-            aria-label="Open menu"
-            className="md:hidden p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
-            onClick={() => setMobileOpen((v) => !v)}
+
+          <Link
+            href="/quote"
+            className="hidden md:flex items-center gap-2 bg-[var(--ue-primary)] text-white px-6 py-2.5 rounded-full font-medium text-sm hover:bg-blue-700 transition-all shadow-md hover:shadow-lg"
           >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            Get a Quote
+            <ArrowRight size={16} />
+          </Link>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="lg:hidden p-2 text-[var(--ue-secondary)]"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
-      {mobileOpen && (
-        <div
-          className="md:hidden border-t border-black/5 dark:border-white/10 bg-[var(--ue-bg)] dark:bg-[var(--ue-accent-green)]"
-        >
-          <nav className="px-4 py-3 flex flex-col gap-3">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-sm text-black dark:text-white"
-              >
-                {item.label}
-              </Link>
-            ))}
-            {session ? (
-              <div className="flex items-center gap-3 mt-1">
-                {session.user?.image ? (
-                  <Image
-                    src={session.user.image}
-                    alt={session.user?.name ?? "User"}
-                    width={32}
-                    height={32}
-                    className="h-8 w-8 rounded-full object-cover border border-black/10 dark:border-white/10"
-                  />
-                ) : (
-                  <div className="h-8 w-8 rounded-full bg-black/10 dark:bg-white/20" />
-                )}
-                <button
-                  onClick={() => {
-                    setMobileOpen(false);
-                    signOut();
-                  }}
-                  className="px-3 py-2 rounded-md bg-[color:var(--ue-primary)] text-white text-sm"
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={() => {
-                  setMobileOpen(false);
-                  signIn("google", { prompt: "select_account" });
-                }}
-                className="mt-1 px-3 py-2 rounded-md bg-[color:var(--ue-primary)] text-white text-sm"
-              >
-                Login
-              </button>
-            )}
-          </nav>
+
+      {/* Mobile Menu */}
+      <div
+        className={`lg:hidden fixed inset-0 z-40 bg-[var(--ue-bg)] transition-transform duration-300 ${mobileOpen ? "translate-x-0" : "translate-x-full"}`}
+        style={{ top: "73px" }}
+      >
+        <div className="flex flex-col p-8 gap-6 h-full border-t border-gray-100">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={() => setMobileOpen(false)}
+              className="text-lg font-medium font-heading text-[var(--ue-secondary)] border-b border-gray-100 pb-4 hover:text-[var(--ue-primary)] transition-colors"
+            >
+              {link.name}
+            </Link>
+          ))}
+          <Link
+            href="/quote"
+            onClick={() => setMobileOpen(false)}
+            className="mt-4 bg-[var(--ue-primary)] text-white py-3 rounded-full font-medium text-center shadow-md"
+          >
+            Get a Quote
+          </Link>
         </div>
-      )}
+      </div>
     </header>
   );
 }

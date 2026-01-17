@@ -1,26 +1,34 @@
 "use client";
 
-import { Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Linkedin } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="py-10 text-center text-foreground/70">
-      <div className="space-x-4">
-        <Link href="/" className="hover:underline">Home</Link>
-        <Link href="/about" className="hover:underline">About</Link>
-        <Link href="/services" className="hover:underline">Services</Link>
-        <Link  href="/contact" className="hover:underline">Contact</Link>
+    <footer className="bg-[#0B1128] text-gray-300 py-16 border-t border-white/10">
+      <div className="max-w-[1400px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+
+        {/* Brand & Copyright */}
+        <div className="text-center md:text-left">
+          <h3 className="text-white font-heading font-bold text-2xl mb-2">UNITY ENTERPRISES</h3>
+          <p className="text-sm opacity-60">© 2025 Unity Enterprises. All rights reserved.</p>
+        </div>
+
+        {/* Links */}
+        <ul className="flex flex-wrap justify-center gap-8 text-[15px] font-normal tracking-wide">
+          <li><Link href="/" className="hover:text-[var(--ue-primary)] transition-colors">Home</Link></li>
+          <li><Link href="/about" className="hover:text-[var(--ue-primary)] transition-colors">About Us</Link></li>
+          <li><Link href="/electrical" className="hover:text-[var(--ue-primary)] transition-colors">Electrical</Link></li>
+          <li><Link href="/digital" className="hover:text-[var(--ue-primary)] transition-colors">Digital & AI</Link></li>
+        </ul>
+
+        {/* Socials */}
+        <div className="flex gap-4">
+          <a href="#" className="p-3 bg-white/5 rounded-full hover:bg-[var(--ue-primary)] hover:text-white transition-all border border-white/10">
+            <Linkedin size={20} />
+          </a>
+        </div>
       </div>
-      <div className="mt-4 flex items-center justify-center gap-4 text-[color:var(--ue-accent-green)]">
-        <Linkedin className="spin-hover" />
-        <Mail className="spin-hover" />
-        <Phone className="spin-hover" />
-        <MapPin className="spin-hover" />
-      </div>
-      <p className="mt-3">© Unity Enterprises 2025</p>
     </footer>
   );
 }
-
-

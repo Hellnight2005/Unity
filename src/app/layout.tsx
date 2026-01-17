@@ -1,23 +1,35 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto } from "next/font/google"; // Alfa Laval style
 import "./globals.css";
 import AppProviders from "@/components/Providers";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Unified Font: Clean, Industrial
+const roboto = Roboto({
   subsets: ["latin"],
+  variable: "--font-heading", // Reusing variable for consistency
+  weight: ["300", "400", "500", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const robotoBody = Roboto({
   subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["300", "400", "500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "UNITY ENTERPRISES",
-
+  title: "Unity Enterprises - Electrical Engineering & AI Solutions",
+  description: "Advanced electrical engineering, manufacturing, and AI-driven automation solutions.",
+  icons: {
+    icon: [
+      { url: "/unity-logo.jpeg", type: "image/jpeg" },
+    ],
+    shortcut: ["/unity-logo.jpeg"],
+    apple: [
+      { url: "/unity-logo.jpeg", type: "image/jpeg" },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -28,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${roboto.variable} ${robotoBody.variable} font-body antialiased`}
         suppressHydrationWarning
       >
         <AppProviders>
