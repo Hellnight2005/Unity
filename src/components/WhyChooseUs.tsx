@@ -30,7 +30,7 @@ export default function WhyChooseUs() {
                             </div>
                             <div>
                                 <h3 className="font-bold text-lg mb-1 text-slate-900 dark:text-white">{feature.title}</h3>
-                                <p className="text-sm text-slate-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-gray-200">{feature.text}</p>
+                                <p className="text-sm text-slate-600 dark:text-gray-300 group-hover:text-slate-900 dark:group-hover:text-gray-200">{feature.text}</p>
                             </div>
                         </div>
                     ))}

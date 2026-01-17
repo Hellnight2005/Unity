@@ -40,7 +40,7 @@ export default function ServiceCards() {
                             </div>
                             <div>
                                 <h3 className="text-2xl md:text-3xl font-heading font-medium text-white mb-2">Electrical Engineering</h3>
-                                <p className="text-gray-400 text-sm md:text-base">Comprehensive manufacturing and maintenance solutions.</p>
+                                <p className="text-gray-300 text-sm md:text-base">Comprehensive manufacturing and maintenance solutions.</p>
                             </div>
                         </div>
                         <ul className="space-y-3 md:space-y-4">
@@ -61,7 +61,7 @@ export default function ServiceCards() {
                             </div>
                             <div>
                                 <h3 className="text-2xl md:text-3xl font-heading font-medium text-white mb-2">Digitalization & AI</h3>
-                                <p className="text-gray-400 text-sm md:text-base">Smart automation and data-driven insights.</p>
+                                <p className="text-gray-300 text-sm md:text-base">Smart automation and data-driven insights.</p>
                             </div>
                         </div>
                         <ul className="space-y-3 md:space-y-4">
