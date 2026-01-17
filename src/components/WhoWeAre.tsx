@@ -1,5 +1,5 @@
-"use client";
-
+import Link from "next/link";
+import Image from "next/image";
 import { Target, Lightbulb } from "lucide-react";
 
 export default function WhoWeAre() {
@@ -55,10 +55,13 @@ export default function WhoWeAre() {
 
                 <div className="relative order-1 lg:order-2 h-full min-h-[500px]">
                     <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl h-full border border-gray-800">
-                        <img
+                        <Image
                             src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070"
                             alt="Industrial Engineering"
-                            className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                            fill
+                            className="object-cover transform hover:scale-105 transition-transform duration-700"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            priority
                         />
                         <div className="absolute inset-0 bg-[#0B1128]/10 mix-blend-multiply dark:bg-[#0B1128]/50"></div>
                     </div>
