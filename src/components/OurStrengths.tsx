@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, Factory, ShieldCheck, ArrowRight } from "lucide-react";
+import { Factory, ShieldCheck, ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 export default function OurStrengths() {
