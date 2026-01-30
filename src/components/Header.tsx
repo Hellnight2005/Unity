@@ -55,12 +55,12 @@ export default function Header() {
       <div className="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto">
         {/* Logo Section */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10 bg-white shadow-sm rounded-lg overflow-hidden flex items-center justify-center border border-gray-100 group-hover:border-[var(--ue-primary)] transition-colors">
+          <div className="relative w-16 h-16 bg-white shadow-sm rounded-lg overflow-hidden flex items-center justify-center border border-gray-100 group-hover:border-[var(--ue-primary)] transition-colors">
             <Image
               src="/unity-logo.jpeg"
               alt="Unity Logo"
-              width={40}
-              height={40}
+              width={64}
+              height={64}
               className="object-contain p-0.5"
             />
           </div>

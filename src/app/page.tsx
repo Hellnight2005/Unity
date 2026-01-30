@@ -4,6 +4,7 @@ import ServiceCards from "@/components/ServiceCards";
 import ClientsSection from "@/components/Clients";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactSection from "@/components/ContactSection";
+import OurStrengths from "@/components/OurStrengths";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <HeroSection />
       <WhoWeAre />
       <ServiceCards />
+      <OurStrengths />
       <ClientsSection />
       <WhyChooseUs />
       <ContactSection />

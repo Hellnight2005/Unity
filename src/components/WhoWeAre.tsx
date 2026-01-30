@@ -13,18 +13,11 @@ export default function WhoWeAre() {
                     </div>
 
                     <h2 className="text-3xl md:text-5xl font-heading font-light text-white mb-6 md:mb-8 leading-tight">
-                        Engineering Excellence <br />
-                        <span className="font-bold">Since 2021</span>
+                        ABOUT US
                     </h2>
 
-                    <p className="text-gray-300 leading-relaxed text-base md:text-lg mb-6 md:mb-8 font-light">
-                        Founded in 2021 under the leadership of <strong className="text-white">Siddhesh Maruti Salunke</strong>,
-                        the company has evolved into <strong className="text-blue-400">Unity Enterprises</strong>.
-                        We are a distinguished entity specializing in electrical engineering and advanced digital automation solutions.
-                    </p>
-
-                    <p className="text-gray-300 leading-relaxed text-base md:text-lg mb-8 md:mb-12 font-light">
-                        With an operational footprint across <span className="font-medium text-white">Mumbai Suburban MMR</span> and <span className="font-medium text-white">MIDC Lote Parshuram</span>, we deliver world-class solutions that drive industrial growth.
+                    <p className="text-gray-300 leading-relaxed text-lg md:text-xl mb-6 md:mb-8 font-light">
+                        Established in 1998 as an electrical maintenance service in Chiplun MIDC, we have evolved into <strong className="text-blue-400">UNITY ENTERPRISES</strong>—a trusted name in electrical engineering and advanced digital automation solutions. Today, we operate with a strong presence across the Mumbai Suburban MMR region and MIDC Lote Parshuram, Ratnagiri.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -33,9 +26,9 @@ export default function WhoWeAre() {
                             <div className="w-12 h-12 bg-blue-900/30 text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <Target size={24} />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Our Vision</h3>
+                            <h3 className="text-xl font-bold text-white mb-3">VISION</h3>
                             <p className="text-sm text-gray-400 leading-relaxed">
-                                To lead the future by helping industries grow rapidly through advanced digitalization.
+                                To lead the future by enabling industries to grow faster through smart digitalization and automation.
                             </p>
                         </div>
 
@@ -44,9 +37,9 @@ export default function WhoWeAre() {
                             <div className="w-12 h-12 bg-indigo-900/30 text-blue-200 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <Lightbulb size={24} />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Our Aim</h3>
+                            <h3 className="text-xl font-bold text-white mb-3">MISSION</h3>
                             <p className="text-sm text-gray-400 leading-relaxed">
-                                Empower businesses through intelligent, technology-driven services.
+                                To empower businesses with intelligent, technology-driven solutions that simplify operations, enhance customer experiences, and drive sustainable growth.
                             </p>
                         </div>
                     </div>
