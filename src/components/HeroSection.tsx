@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
     {
         id: 1,
         image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070",
-        title: "ELECTRICAL",
+        title: "Electrical Solutions",
         subtitle: "Advanced Panel Manufacturing",
         description: "State-of-the-art HT/LT Panels and Power Distribution solutions designed for reliability and safety.",
         ctaText: "Explore Electrical",
@@ -65,8 +65,27 @@ export default function HeroSection() {
         return () => clearInterval(timer);
     }, []);
 
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    };
+
     return (
         <section className="relative w-full bg-[var(--ue-secondary)]">
+
+            {/* 1. Static Tagline Section */}
+            <div className="relative w-full py-4 px-6 flex flex-col items-center justify-center text-center bg-[#0B1128] z-20">
+                <h1 className="text-4xl md:text-2xl lg:text-3xl font-serif font-bold text-white mb-4 tracking-tight drop-shadow-lg leading-tight uppercase">
+                    Unity Enterprises
+                </h1>
+                <p className="text-sm md:text-lg lg:text-xl font-serif text-white/90 leading-relaxed max-w-4xl tracking-widest uppercase opacity-80">
+                    “A Brighter Tomorrow Begin With Today’s Innovation”
+                </p>
+            </div>
+
             {/* Slider Container - Responsive Height */}
             <div className="relative w-full min-h-[650px] md:h-[700px] overflow-hidden flex flex-col">
                 {/* Slides */}
@@ -82,74 +101,93 @@ export default function HeroSection() {
                             style={{ backgroundImage: `url(${slide.image})` }}
                         >
                             {/* Overlay: Darker on mobile for text readability */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/95 via-[#0f172a]/90 to-[#0f172a]/95 md:bg-gradient-to-r md:from-[#0B1128]/95 md:via-[#0B1128]/70 md:to-[#0B1128]/95"></div>
+                            <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/95 md:bg-gradient-to-l md:from-[#0f172a]/95 md:via-[#0f172a]/70 md:to-transparent"></div>
                         </div>
 
                         {/* Content Overlay */}
-                        <div className="absolute inset-0 flex items-center justify-center md:justify-between z-20 pointer-events-none">
-                            <div className="max-w-[1400px] mx-auto px-6 flex flex-col lg:flex-row justify-center lg:justify-between h-full pt-32 pb-20 md:py-20 gap-8 lg:gap-12"> {/* Standardized max-w and padding */}
+                        <div className="absolute inset-0 flex items-center justify-center md:justify-end z-20 pointer-events-none">
+                            <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-center md:justify-end h-full pt-32 pb-20 md:py-20"> {/* Added top padding for mobile */}
 
-                                {/* Desktop Slogan (Left Side) - Tuned for LG (Laptop) vs XL (Desktop) */}
-                                <div className="hidden lg:flex flex-col justify-center lg:max-w-[45%] xl:max-w-2xl text-left pointer-events-auto animate-fadeInLeft pl-0 lg:pl-0 xl:pl-8">
-                                    <h1 className="text-5xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-serif font-bold text-white mb-6 tracking-tight drop-shadow-2xl leading-none">
-                                        UNITY <br />
-                                        <span className="text-white">ENTERPRISES</span>
-                                    </h1>
-                                    <div className="w-20 h-1 bg-[var(--ue-primary)] mb-6 xl:mb-8"></div>
-                                    <p className="text-lg lg:text-xl xl:text-3xl font-serif italic text-white/90 leading-tight drop-shadow-lg border-l-4 border-white/20 pl-6">
-                                        “A BRIGHTER TOMORROW BEGIN WITH TODAY’S INNOVATION”
-                                    </p>
-                                </div>
-
-                                {/* Mobile/Tablet Layout: Centered, Simplified - Visible up to LG */}
-                                <div className="w-full lg:hidden flex flex-col items-center justify-center text-center space-y-6 pointer-events-auto">
-                                    <h2 className="text-4xl md:text-6xl font-heading font-bold uppercase tracking-wider text-[var(--ue-primary)] leading-tight drop-shadow-md">
+                                {/* Mobile Layout: Centered, Simplified */}
+                                <div className="w-full md:hidden flex flex-col items-center justify-center text-center space-y-6 pointer-events-auto">
+                                    <h2 className="text-4xl font-heading font-bold uppercase tracking-wider text-[var(--ue-primary)] leading-tight drop-shadow-md">
                                         {slide.title}
                                     </h2>
-                                    <p className="text-gray-100 text-lg md:text-2xl font-light leading-relaxed max-w-2xl drop-shadow-sm">
+                                    <p className="text-gray-100 text-lg font-light leading-relaxed max-w-md drop-shadow-sm">
                                         {slide.subtitle}
                                     </p>
-                                    <p className="text-gray-300 text-sm md:text-lg leading-relaxed max-w-xl mx-auto hidden sm:block">
+                                    <p className="text-gray-300 text-sm leading-relaxed max-w-sm mx-auto hidden sm:block">
                                         {slide.description}
                                     </p>
 
-                                    <a href={slide.ctaLink} className="mt-6 px-10 py-4 bg-[var(--ue-primary)] text-white font-bold rounded-full shadow-lg hover:bg-blue-600 transition-all uppercase tracking-wide text-sm md:text-base flex items-center gap-2">
-                                        {slide.ctaText} <ArrowRight size={20} />
+                                    <a href={slide.ctaLink} className="mt-4 px-8 py-3 bg-[var(--ue-primary)] text-white font-bold rounded-full shadow-lg hover:bg-blue-600 transition-all uppercase tracking-wide text-sm flex items-center gap-2">
+                                        {slide.ctaText} <ArrowRight size={18} />
                                     </a>
                                 </div>
 
 
-                                {/* Desktop Layout: Right aligned, Detailed List - Flexible Width */}
-                                <div className="hidden lg:flex w-full lg:max-w-[50%] xl:max-w-2xl text-white space-y-8 animate-fadeInRight pointer-events-auto flex-col justify-center items-start text-left">
-                                    {/* Dynamic Points List */}
-                                    <div className="relative pl-4 w-full"> {/* Reduced pl-6 to pl-4 */}
+                                {/* Desktop Layout: Right aligned, Detailed List */}
+                                <div className="hidden md:flex w-full md:max-w-2xl text-white space-y-10 animate-fadeInRight pointer-events-auto flex-col justify-center items-start text-left ml-auto">
+
+                                    {/* Dynamic Points List - Hidden on Mobile */}
+                                    <div className="relative pl-6 w-full">
                                         {/* Vertical linking line */}
                                         <div className="absolute left-0 top-5 bottom-5 w-[2px] bg-sky-500/30 rounded-full"></div>
 
-                                        <ul className="space-y-6 xl:space-y-8 relative">
+                                        <ul className="space-y-8 relative">
                                             {slide.points.map((point, i) => (
-                                                <li key={i} className="flex items-center gap-3 xl:gap-4 group">
-                                                    {/* Connector Line - Shortened */}
-                                                    <div className="absolute left-0 w-6 h-[2px] bg-sky-500/30 group-hover:bg-sky-400 transition-colors"></div>
+                                                <li key={i} className="flex items-center gap-5 group">
+                                                    {/* Connector Line */}
+                                                    <div className="absolute left-0 w-8 h-[2px] bg-sky-500/30 group-hover:bg-sky-400 transition-colors"></div>
 
-                                                    <div className="relative flex-shrink-0 z-10 ml-6"> {/* Reduced ml-8 to ml-6 */}
-                                                        {/* Dot Container - Sized Down */}
-                                                        <div className="w-6 h-6 xl:w-8 xl:h-8 rounded-full bg-[var(--ue-primary)] border-[2px] border-[#0B1128] shadow-[0_0_15px_rgba(0,104,255,0.4)] flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,104,255,0.6)] transition-all duration-300">
-                                                            <div className="w-1.5 h-1.5 xl:w-2 xl:h-2 rounded-full bg-white shadow-sm"></div>
+                                                    <div className="relative flex-shrink-0 z-10 ml-8">
+                                                        {/* Dot Container */}
+                                                        <div className="w-10 h-10 rounded-full bg-[var(--ue-primary)] border-[3px] border-[#0B1128] shadow-[0_0_20px_rgba(0,104,255,0.4)] flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(0,104,255,0.6)] transition-all duration-300">
+                                                            <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm"></div>
                                                         </div>
                                                     </div>
-                                                    <span className="text-lg lg:text-xl xl:text-2xl font-bold text-white tracking-wide shadow-black drop-shadow-md opacity-90 group-hover:opacity-100 transition-opacity leading-tight">
+                                                    <span className="text-2xl font-bold text-white tracking-wide shadow-black drop-shadow-md opacity-90 group-hover:opacity-100 transition-opacity">
                                                         {point}
                                                     </span>
                                                 </li>
                                             ))}
                                         </ul>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))}
+
+                {/* Navigation Arrows - Adjusted for Mobile */}
+                <div className="absolute bottom-32 right-6 flex gap-4 z-30 md:hidden">
+                    <button
+                        onClick={prevSlide}
+                        className="p-3 rounded-full bg-white/10 text-white backdrop-blur-md border border-white/10"
+                    >
+                        <ChevronLeft size={24} />
+                    </button>
+                    <button
+                        onClick={nextSlide}
+                        className="p-3 rounded-full bg-white/10 text-white backdrop-blur-md border border-white/10"
+                    >
+                        <ChevronRight size={24} />
+                    </button>
+                </div>
+
+                <button
+                    onClick={prevSlide}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-[var(--ue-primary)] text-white backdrop-blur-md transition-all border border-white/10 hover:scale-110 hidden md:flex"
+                >
+                    <ChevronLeft size={28} />
+                </button>
+                <button
+                    onClick={nextSlide}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-[var(--ue-primary)] text-white backdrop-blur-md transition-all border border-white/10 hover:scale-110 hidden md:flex"
+                >
+                    <ChevronRight size={28} />
+                </button>
             </div>
 
             {/* Bottom Highlight Boxes - Restored with Lists & CTA */}
